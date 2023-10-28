@@ -2,6 +2,8 @@ package objetos;
 
 import java.util.Arrays;
 
+import aerolinea.Constantes;
+
 public class Vuelo {
 
 	private String avion;
@@ -11,7 +13,7 @@ public class Vuelo {
 	private int totalPlazas;
 	private int plazasCompradas=0;
 	private double precioPlaza;
-	private Trabajador trabajadores[] = new Trabajador[4];
+	private Trabajador trabajadores[] = new Trabajador[Constantes.TRABAJADORES_LENGTH];
 	
 
 	public Vuelo(String avion, String origen, String destino, int duracion, int totalPlazas, int plazasCompradas,
@@ -31,7 +33,7 @@ public class Vuelo {
 
 	@Override
 	public String toString() {
-		return "Vuelo [avion=" + avion + ", origen=" + origen + ", destino=" + destino + ", duracion=" + duracion
+		return "Vuelo [vuelo=" + avion + ", origen=" + origen + ", destino=" + destino + ", duracion=" + duracion
 				+ ", totalPlazas=" + totalPlazas + ", plazasCompradas=" + plazasCompradas + ", precioPlaza="
 				+ precioPlaza + ", trabajadores=" + Arrays.toString(trabajadores) + "]";
 	}
@@ -131,10 +133,6 @@ public class Vuelo {
 	public void setTrabajadores(Trabajador[] trabajadores) {
 		this.trabajadores = trabajadores;
 	}
-	
-	
-	
-	
-	
+
 	
 }

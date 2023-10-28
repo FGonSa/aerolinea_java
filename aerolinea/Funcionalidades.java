@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import objetos.Asistente;
+import objetos.Copiloto;
 import objetos.Piloto;
 import objetos.Trabajador;
 import objetos.Vuelo;
@@ -181,10 +183,10 @@ public class Funcionalidades {
 			objeto_trabajador = crearPiloto();
 			break;
 		case 2:
-			System.out.println("i es dos.");
+			objeto_trabajador = crearCopiloto();
 			break;
 		case 3:
-			System.out.println("i es tres.");
+			objeto_trabajador = crearAsistente();
 			break;
 		}
 
@@ -214,13 +216,96 @@ public class Funcionalidades {
 		telefono = scanner.nextLine();
 		System.out.println("Introduce referencia: ");
 		referencia = scanner.nextLine();
-		
-		//Lo suyo sería introducir la fecha manualmente
-		//Pero por ahora lo dejo así
+
+		// Lo suyo sería introducir la fecha manualmente
+		// Pero por ahora lo dejo así
 		fecha = LocalDate.now();
 		System.out.println("La fecha de creación es: " + fecha);
-		
+
+		System.out.println("Piloto creado con éxito.");
 
 		return obj_piloto = new Piloto(nombre, apellidos, dni, telefono, referencia, fecha);
+	}
+
+	public static int encontrarPosicionVacia(Trabajador[] array) {
+		for (int i = 0; i < array.length; i++) {
+			if (array[i] == null) { // Aquí asumimos que null indica una posición vacía, ajusta según tus
+									// necesidades
+				return i;
+			}
+		}
+		return -1; // Devuelve -1 si no se encuentra ninguna posición vacía
+	}
+
+	public static void datosTrabajadores(Trabajador[] array) {
+		for (int i = 0; i < array.length; i++) {
+			if (array[i] != null) {
+				System.out.println(array[i].toString());
+			}
+
+		}
+	}
+
+	public static Copiloto crearCopiloto() {
+
+		Copiloto obj_copiloto = null;
+
+		String nombre;
+		String apellidos;
+		String dni;
+		boolean master = false;
+		int opcion = 0;
+		Scanner scanner = new Scanner(System.in);
+
+		System.out.println("Introduce nombre: ");
+		nombre = scanner.nextLine();
+		System.out.println("Introduce apellidos: ");
+		apellidos = scanner.nextLine();
+		System.out.println("Introduce DNI: ");
+		dni = scanner.nextLine();
+
+		do {
+			System.out.println("Tiene el máster de aviación?");
+			System.out.println("1) SÍ || 2) NO");
+			try {
+				opcion = scanner.nextInt();
+				if (opcion <= 0 || opcion > 2) {
+					System.out.println("Debes introducir una opción correcta.");
+				}
+
+			} catch (InputMismatchException ime) {
+				System.out.println("ERROR: Debes introducir un número.");
+				scanner.next(); // Limpia el búfer de entrada
+			}
+		} while (opcion <= 0 || opcion > 2);
+
+		if (opcion == 1) {
+			master = true;
+		}
+
+		System.out.println("Copiloto creado con éxito.");
+
+		return obj_copiloto = new Copiloto(nombre, apellidos, dni, master);
+	}
+
+	public static Asistente crearAsistente() {
+
+		Asistente obj_asistente = null;
+
+		String nombre;
+		String apellidos;
+		String dni;
+		Scanner scanner = new Scanner(System.in);
+
+		System.out.println("Introduce nombre: ");
+		nombre = scanner.nextLine();
+		System.out.println("Introduce apellidos: ");
+		apellidos = scanner.nextLine();
+		System.out.println("Introduce DNI: ");
+		dni = scanner.nextLine();
+
+		System.out.println("Asistente creado con éxito.");
+
+		return obj_asistente = new Asistente(nombre, apellidos, dni);
 	}
 }
