@@ -8,7 +8,9 @@ public class Main {
 		// TODO Auto-generated method stub
 		int menuOption = -1;
 		int menuAdminOption = -1;
+		int menuClientOption = -1;
 		boolean accesoMenuAdmin = false;
+		boolean accesoMenuClient = false;
 		Vuelo objeto_vuelo = null;
 		Trabajador trabajadores[] = new Trabajador[Constantes.TRABAJADORES_LENGTH];
 		Trabajador trabajadorCreado = null;
@@ -16,6 +18,7 @@ public class Main {
 		boolean minimoUnTrabajador = false;
 		int posicionArrayTrabajadores = -1;
 		int contadorPosicionesVacias = 0;
+		boolean vueloOptimo = false;
 
 		// INICIO APP
 		// Creamos el vuelo
@@ -59,7 +62,7 @@ public class Main {
 							} else {
 
 								// Creamos el objeto
-								trabajadorCreado = Funcionalidades.crearTrabajador();
+								trabajadorCreado = Funcionalidades.crearTrabajador(trabajadores);
 
 								// Buscamos posición vacía para introducirlo
 								posicionArrayTrabajadores = Funcionalidades.encontrarPosicionVacia(trabajadores);
@@ -100,6 +103,34 @@ public class Main {
 
 			// ACCEDER COMO CLIENTE
 			case 2:
+				vueloOptimo = Funcionalidades.comprobarTripulacion(trabajadores);
+
+				if (vueloOptimo) {
+					accesoMenuClient = true;
+				} else {
+					accesoMenuClient = false;
+				}
+
+				if (accesoMenuClient == true) {
+					do {
+						Funcionalidades.initMenuClient();
+						menuClientOption = Funcionalidades.selectOption(Constantes.MAX_OPTION_CLIENT_MENU);
+						switch (menuClientOption) {
+						case 1:
+							System.out.println(objeto_vuelo.toString());
+							break;
+						case 2:
+							System.out.println("COMPRA DE BILLETES");
+							System.out.println("------------------");
+							break;
+						case 0:
+							break;
+						}
+					} while (menuClientOption != 0);
+				} else {
+					System.out.println("No existe vuelo disponible todavía.");
+				}
+
 				break;
 
 			// CERRAR APP

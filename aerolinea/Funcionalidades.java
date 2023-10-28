@@ -21,6 +21,16 @@ public class Funcionalidades {
 		System.out.println("0. Salir");
 	}
 
+	public static void initMenuClient() {
+
+		System.out.println("==============");
+		System.out.println("MENÚ CLIENTE");
+		System.out.println("==============");
+		System.out.println("1. Ver Datos del Vuelo");
+		System.out.println("2. Comprar billetes");
+		System.out.println("0. Salir al Menú Principal");
+	}
+
 	public static void initMenuAdmin() {
 
 		System.out.println("==============");
@@ -154,11 +164,12 @@ public class Funcionalidades {
 
 	}
 
-	public static Trabajador crearTrabajador() {
+	public static Trabajador crearTrabajador(Trabajador[] array) {
 
 		// Variables
 		Trabajador objeto_trabajador = null;
 		Scanner scanner = new Scanner(System.in);
+		boolean permitir = false;
 		int opcion = 0;
 
 		// Lógica
@@ -175,6 +186,15 @@ public class Funcionalidades {
 				System.out.println("ERROR: Debes introducir un número.");
 				scanner.next(); // Limpia el búfer de entrada
 			}
+
+			if (opcion == 3) {
+				permitir = comprobarAsistentes(array);
+				if (!permitir) {
+					System.out.println("Se ha alcanzado el máximo de Asistentes.");
+					opcion = 4;
+				}
+			}
+
 		} while (opcion <= 0 || opcion > 3);
 
 		// SWITCH PARA CREAR TRABAJADOR
@@ -308,4 +328,46 @@ public class Funcionalidades {
 
 		return obj_asistente = new Asistente(nombre, apellidos, dni);
 	}
+
+	public static boolean comprobarTripulacion(Trabajador[] array) {
+
+		int accPiloto = 0;
+		int accCopilotos = 0;
+		int accAsistentes = 0;
+		boolean tripulacionOptima = false;
+
+		for (Trabajador trabajador : array) {
+			if (trabajador instanceof Piloto) {
+				accPiloto++;
+			} else if (trabajador instanceof Copiloto) {
+				accCopilotos++;
+			} else if (trabajador instanceof Asistente) {
+				accAsistentes++;
+			}
+		}
+
+		if ((accPiloto >= Constantes.MIN_PILOTO) && (Constantes.MIN_COPILOTO >= 0)
+				&& (accAsistentes >= Constantes.MIN_ASISTENTE)) {
+			tripulacionOptima = true;
+		}
+		return tripulacionOptima;
+	}
+
+	public static boolean comprobarAsistentes(Trabajador[] array) {
+
+		int accAsistentes = 0;
+		boolean permitir = false;
+
+		for (Trabajador trabajador : array) {
+			if (trabajador instanceof Asistente) {
+				accAsistentes++;
+			}
+		}
+
+		if (accAsistentes < Constantes.MAX_ASISTENTE) {
+			permitir = true;
+		}
+		return permitir;
+	}
+
 }
