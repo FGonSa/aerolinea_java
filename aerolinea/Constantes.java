@@ -15,7 +15,7 @@ public class Constantes {
 	public final static int MIN_PILOTO = 1;
 	public final static int MIN_COPILOTO = 1;
 	public final static int MIN_ASISTENTE = 1;
-	public final static int MAX_ASISTENTE = 1;
+	public final static int MAX_ASISTENTE = 3;
 	
 	public final static int MAX_CANTIDAD_BILLETES = 3;
 

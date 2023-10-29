@@ -150,6 +150,7 @@ public class Main {
 
 							if (plazasLibres > 0) {
 								do {
+									
 									System.out.println("COMPRA DE BILLETES");
 									System.out.println("------------------");
 

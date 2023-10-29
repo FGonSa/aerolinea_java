@@ -107,9 +107,9 @@ public class Vuelo implements GestionVuelo {
 		// de bitllets a comprar.
 		int resultado = 0;
 
-		resultado = this.totalPlazas - numeroBilletesComprar;
+		resultado = (this.totalPlazas - this.plazasCompradas) - numeroBilletesComprar;
 
-		if (resultado > 0) {
+		if (resultado >= 0) {
 			return true;
 		} else {
 			return false;
