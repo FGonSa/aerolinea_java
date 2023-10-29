@@ -59,6 +59,24 @@ public class Funcionalidades {
 
 		return option;
 	}
+	
+	public static int selectOption(int MIN_OPTION, int MAX_OPTION) {
+		int option = -1;
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Escoja una opción:");
+
+		try {
+			option = scanner.nextInt();
+
+			if (option > MAX_OPTION || option < MIN_OPTION) {
+				System.out.println("Debes escoger una opción válida.");
+			}
+		} catch (InputMismatchException ime) {
+			System.out.println("ERROR: Debes introducir un número.");
+		}
+
+		return option;
+	}
 
 	public static int selectOption() {
 		int option = -1;
@@ -368,6 +386,32 @@ public class Funcionalidades {
 			permitir = true;
 		}
 		return permitir;
+	}
+	
+	public static int indicarCantidadBilletes() {
+		Scanner scanner = new Scanner(System.in);
+		int cantidadBilletes = -1;
+		int option = 0;
+		
+		do {
+			System.out.println("Indique cuántos billetes desea comprar: ");
+			System.out.println("(Mínimo 0 y Máximo "  + Constantes.MAX_CANTIDAD_BILLETES + ")");
+			
+			try {
+				cantidadBilletes = scanner.nextInt();
+			}catch (InputMismatchException ime) {
+				System.out.println("ERROR: Debes introducir un número.");
+				scanner.next(); // Limpia el búfer de entrada
+			}
+			
+			if(cantidadBilletes < 0 || cantidadBilletes > Constantes.MAX_CANTIDAD_BILLETES) {
+				System.out.println("Debes introducir una cantidad correcta.");
+			}
+			
+		}while(cantidadBilletes < 0 || cantidadBilletes > Constantes.MAX_CANTIDAD_BILLETES);
+		
+		return cantidadBilletes;
+		
 	}
 
 }
